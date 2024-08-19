@@ -13,7 +13,9 @@ export default function Editor() {
   const doc = new Y.Doc();
 
   const provider = new WebsocketProvider(
-    'ws://localhost:3000',
+    process.env.NODE_ENV === 'production'
+      ? 'wss://https://collaborative-editing-notes.gojiyuuniotorikudasai.com'
+      : 'ws://localhost:3000',
     'my-roomname',
     doc
   );
