@@ -28,5 +28,41 @@ export default function Editor() {
     },
   });
 
-  return <BlockNoteView editor={editor} theme={'light'} />;
+  const handleSaveData = async () => {
+    const response = await fetch('/api/saveData', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ data: editor.document }),
+    });
+
+    if (response.ok) {
+      alert('Data saved successfully!');
+    } else {
+      alert('Something went wrong!');
+    }
+  };
+
+  // const fetchAllData = async () => {
+  //   const response = await fetch('/api/getAllData');
+
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //   } else {
+  //     alert('Failed to fetch data!');
+  //   }
+  // };
+
+  return (
+    <>
+      <BlockNoteView editor={editor} theme={'light'} />
+      <button
+        className="py-2 px-5 bg-gray-200 rounded"
+        onClick={handleSaveData}
+      >
+        保存する
+      </button>
+    </>
+  );
 }
