@@ -81,13 +81,17 @@ export default function Editor() {
 
   return (
     <>
-      <BlockNoteView editor={editor} theme={'light'} />
-      <button
-        className="py-2 px-5 bg-gray-200 rounded"
-        onClick={handleSaveData}
-      >
-        保存する
-      </button>
+      <div className="py-5">
+        <BlockNoteView editor={editor} theme={'light'} />
+        <div className="mx-[54px] mt-5">
+          <button
+            className="py-2 px-5 rounded bg-sky-600 text-white"
+            onClick={handleSaveData}
+          >
+            保存する
+          </button>
+        </div>
+      </div>
     </>
   );
 }
