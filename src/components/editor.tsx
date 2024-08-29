@@ -7,6 +7,7 @@ import '@blocknote/core/fonts/inter.css';
 import { BlockNoteView } from '@blocknote/mantine';
 import '@blocknote/mantine/style.css';
 import { useCreateBlockNote } from '@blocknote/react';
+import { useEffect } from 'react';
 import { WebsocketProvider } from 'y-websocket';
 
 export default function Editor() {
@@ -53,6 +54,15 @@ export default function Editor() {
   //     alert('Failed to fetch data!');
   //   }
   // };
+
+  useEffect(() => {
+    if (editor.document.length === 1) {
+      editor.insertBlocks(
+        [{ type: 'paragraph', content: 'Hello, world' }],
+        editor.document[0]
+      );
+    }
+  }, [editor]);
 
   return (
     <>
