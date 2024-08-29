@@ -45,22 +45,37 @@ export default function Editor() {
     }
   };
 
-  // const fetchAllData = async () => {
-  //   const response = await fetch('/api/getAllData');
+  const fetchAllData = async () => {
+    const response = await fetch('/api/getAllData');
 
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //   } else {
-  //     alert('Failed to fetch data!');
-  //   }
-  // };
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      alert('Failed to fetch data!');
+    }
+  };
 
   useEffect(() => {
     if (editor.document.length === 1) {
-      editor.insertBlocks(
-        [{ type: 'paragraph', content: 'Hello, world' }],
-        editor.document[0]
-      );
+      (async () => {
+        const allData: [] = await fetchAllData();
+        const latestData: any = allData.at(-1);
+
+        const items: [] = latestData.data;
+
+        items.reverse().forEach((item: any) => {
+          editor.insertBlocks(
+            [
+              {
+                type: item.type,
+                content: item.content.length === 0 ? '' : item.content[0].text,
+              },
+            ],
+            editor.document[0]
+          );
+        });
+      })();
     }
   }, [editor]);
 
