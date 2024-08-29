@@ -12,6 +12,7 @@
     "@blocknote/core": "^0.15.5",
     "@blocknote/mantine": "^0.15.5",
     "@blocknote/react": "^0.15.5",
+    "mongodb": "^6.8.0",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
