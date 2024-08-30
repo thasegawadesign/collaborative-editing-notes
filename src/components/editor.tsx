@@ -15,7 +15,7 @@ export default function Editor() {
 
   const provider = new WebsocketProvider(
     process.env.NODE_ENV === 'production'
-      ? 'wss://https://collaborative-editing-notes.gojiyuuniotorikudasai.com'
+      ? 'wss://collaborative-editing-notes.gojiyuuniotorikudasai.com'
       : 'ws://localhost:3000',
     'my-roomname',
     doc
@@ -30,29 +30,40 @@ export default function Editor() {
   });
 
   const handleSaveData = async () => {
-    const response = await fetch('/api/saveData', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ data: editor.document }),
-    });
+    try {
+      const response = await fetch('/api/saveData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: editor.document }),
+      });
 
-    if (response.ok) {
-      alert('Data saved successfully!');
-    } else {
-      alert('Something went wrong!');
+      if (response.ok) {
+        alert('Data saved successfully!');
+      } else {
+        alert('Something went wrong!');
+      }
+    } catch (error) {
+      console.error('Error saving data:', error);
+      alert('An unexpected error occurred while saving data!');
+      return null;
     }
   };
 
   const fetchAllData = async () => {
-    const response = await fetch('/api/getAllData');
+    try {
+      const response = await fetch('/api/getAllData');
 
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      alert('Failed to fetch data!');
+      if (response.ok) {
+        return await response.json();
+      } else {
+        alert('Failed to fetch data!');
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      alert('An unexpected error occurred while fetching data!');
+      return null;
     }
   };
 
