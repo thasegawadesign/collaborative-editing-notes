@@ -46,13 +46,18 @@ export default function Editor() {
   };
 
   const fetchAllData = async () => {
-    const response = await fetch('/api/getAllData');
+    try {
+      const response = await fetch('/api/getAllData');
 
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      alert('Failed to fetch data!');
+      if (response.ok) {
+        return await response.json();
+      } else {
+        alert('Failed to fetch data!');
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      alert('An unexpected error occurred while fetching data!');
+      return null;
     }
   };
 
