@@ -30,18 +30,24 @@ export default function Editor() {
   });
 
   const handleSaveData = async () => {
-    const response = await fetch('/api/saveData', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ data: editor.document }),
-    });
+    try {
+      const response = await fetch('/api/saveData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data: editor.document }),
+      });
 
-    if (response.ok) {
-      alert('Data saved successfully!');
-    } else {
-      alert('Something went wrong!');
+      if (response.ok) {
+        alert('Data saved successfully!');
+      } else {
+        alert('Something went wrong!');
+      }
+    } catch (error) {
+      console.error('Error saving data:', error);
+      alert('An unexpected error occurred while saving data!');
+      return null;
     }
   };
 
