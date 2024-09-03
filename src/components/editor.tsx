@@ -68,6 +68,7 @@ export default function Editor() {
   };
 
   useEffect(() => {
+    if (editor.document.length === 0) return;
     if (editor.document.length === 1) {
       (async () => {
         const allData: [] = await fetchAllData();
