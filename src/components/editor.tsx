@@ -68,11 +68,10 @@ export default function Editor() {
   };
 
   useEffect(() => {
-    if (editor.document.length === 0) return;
-    if (editor.document.length === 1) {
+    if (editor?.document?.length === 1) {
       (async () => {
         const allData: [] = await fetchAllData();
-        const latestData: any = allData.at(-1);
+        const latestData: any = allData?.at(-1);
 
         const items: [] = latestData?.data;
 
