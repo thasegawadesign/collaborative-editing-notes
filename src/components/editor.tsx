@@ -53,8 +53,7 @@ export default function Editor() {
 
   const fetchAllData = async () => {
     try {
-      const response = await fetch('/api/getAllData');
-
+      const response = await fetch('/api/getAllData', { cache: 'no-store' });
       if (response.ok) {
         return await response.json();
       } else {
