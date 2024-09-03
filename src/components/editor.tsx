@@ -75,6 +75,7 @@ export default function Editor() {
 
         const items: [] = latestData.data;
 
+        if (items.length === 0) return;
         items.reverse().forEach((item: any) => {
           editor.insertBlocks(
             [
