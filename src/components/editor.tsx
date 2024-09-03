@@ -15,7 +15,7 @@ export default function Editor() {
 
   const provider = new WebsocketProvider(
     process.env.NODE_ENV === 'production'
-      ? (process.env.SERVER_URL as string)
+      ? (process.env.NEXT_PUBLIC_SERVER_URL as string)
       : 'ws://localhost:3000',
     'my-roomname',
     doc
