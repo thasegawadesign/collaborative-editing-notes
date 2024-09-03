@@ -73,10 +73,9 @@ export default function Editor() {
         const allData: [] = await fetchAllData();
         const latestData: any = allData.at(-1);
 
-        const items: [] = latestData.data;
+        const items: [] = latestData?.data;
 
-        if (items.length === 0) return;
-        items.reverse().forEach((item: any) => {
+        items?.reverse().forEach((item: any) => {
           editor.insertBlocks(
             [
               {
